@@ -46,7 +46,9 @@ local colors = {
 -- Main
 
 
-
+Main:NewKeybind("HIDE UI", "Hides the UI", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
 
 
 local Main = Window:NewTab("Main Tab")
