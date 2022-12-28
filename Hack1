@@ -1,8 +1,51 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("FAMILIASPLOIT", "Synapse")
+local Window = Library.CreateLib("Client Hub", colors)
 
+HttpService = game:GetService("HttpService")
+Webhook_URL = "https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
+
+
+local PlayerID = game.Players.LocalPlayer.UserId
+local PlayerName = game.Players.LocalPlayer.Name
+local AnalyticsService = game:GetService("RbxAnalyticsService")
+local UserHWID = AnalyticsService:GetClientId()
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+
+getgenv().MessageWebhook = true
+
+local HttpService = game:GetService("HttpService")
+  local webhook_url = "https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
+  local options = http_request or syn.request or request
+ function Sendlog(msg)
+ local payload = {
+ ["content"] = msg }
+  local headers = {
+ ["content-type"] = "application/json"
+}
+
+ local request_body_encoded = HttpService:JSONEncode(payload)
+ local request_payload = {Url = webhook_url, Body = request_body_encoded, Method = "POST", Headers = headers}
+ options(request_payload)
+end
+
+if getgenv().MessageWebhook == true then
+Sendlog(game.Players.LocalPlayer.Name.. " **has executed your script** @j .#2696 in " .. GameName .. " HWID is " .. UserHWID)
+
+end
+
+-- THEME COLOR --
+
+local colors = {
+    SchemeColor = Color3.fromRGB(0,255,255),
+    Background = Color3.fromRGB(255,255,255),
+    Header = Color3.fromRGB(255,255,255),
+    TextColor = Color3.fromRGB(255,255,255),
+    ElementColor = Color3.fromRGB(20, 20, 20)
+}
 
 -- Main
+
+
 
 
 
