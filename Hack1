@@ -1,26 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("FAMILIASPLOIT", "Synapse")
 
-local a=game.Players.LocalPlayer.UserId
-local a=game.Players.LocalPlayer.Name
-local a=game:GetService("RbxAnalyticsService")
-local a=a:GetClientId()getgenv().MessageWebhook=true
-local a=game:GetService("HttpService")
-local b="https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
-local c=http_request or syn.request or request;function Sendlog(d)
-local d={["content"]=d}
-local e={["content-type"]="application/json"}
-local a=a:JSONEncode(d)
-local a={Url=b,Body=a,Method="POST",Headers=e}c(a)end;
-if getgenv().MessageWebhook==true then Sendlog(game.Players.LocalPlayer.Name.. "**has executed your script** @everyone") 
-end
-local a={"saintjaydenn"} 
-for a,a in pairs(a) do
-    wait()
-    if a==game.Players.LocalPlayer.Name then local a=loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/notification_gui_library.lua",true))()
-    end)
-    local a=a.new("success","Success","Success body message.")
-    local a=loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
 -- Main
 
 
