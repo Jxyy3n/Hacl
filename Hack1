@@ -15,7 +15,8 @@ old = hookmetamethod(game,"__index",function(Self,Key)
     return old(Self,Key)
 end)
 getgenv().Key = "Click" -- Click is left click, other than that it can be any other alphabetical key on your keyboard
-getgenv().Range = 100
+getgenv().Range = 10
+
 
 local function ball()
     return workspace:FindFirstChild("Handle")
