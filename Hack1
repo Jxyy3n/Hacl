@@ -18,7 +18,7 @@ getgenv().Key = "j" -- Click is left click, other than that it can be any other 
 getgenv().Range = 20
 
 local function ball()
-    return workspace:FindFirstChild("Football")
+    return workspace:FindFirstChild("Handle")
 end
 local function getsetting()
     local key = string.upper(getgenv().Key)
