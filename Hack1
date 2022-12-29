@@ -2,8 +2,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 local Window = Library.CreateLib("Client Hub", colors)
 
 HttpService = game:GetService("HttpService")
-Webhook_URL = "https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
-
+Webhook_URL = "https://discord.com/api/webhooks/1057850321709322380/yCitXB8Trxt0GGsUhU_QiykgV2SrVjfa_r2MXn7wT5dmNHS_MlAas0hllYTWg9GWI2yJ"
 
 local PlayerID = game.Players.LocalPlayer.UserId
 local PlayerName = game.Players.LocalPlayer.Name
@@ -32,23 +31,9 @@ if getgenv().MessageWebhook == true then
 Sendlog(game.Players.LocalPlayer.Name.. " **has executed your script** @j .#2696 in " .. GameName .. " HWID is " .. UserHWID)
 
 end
-
 -- THEME COLOR --
-
-local colors = {
-    SchemeColor = Color3.fromRGB(0,255,255),
-    Background = Color3.fromRGB(255,255,255),
-    Header = Color3.fromRGB(255,255,255),
-    TextColor = Color3.fromRGB(255,255,255),
-    ElementColor = Color3.fromRGB(20, 20, 20)
-}
-
 -- Main
 
-
-Main:NewKeybind("HIDE UI", "Hides the UI", Enum.KeyCode.F, function()
-	Library:ToggleUI()
-end)
 
 
 local Main = Window:NewTab("Main Tab")
@@ -61,11 +46,13 @@ MainSection:NewSlider("WalkSpeed", "Edit WalkSpeed", 30, 17, function(s) -- 500 
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s 
 end)
 
-MainSection:NewLabel("Jersey HBE")
+MainSection:NewLabel("Magnet")
 MainSection:NewToggle("Enabled", "Enables HBE", function(state)
     if state then
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxyy3n/Hacl/Magnet/Hack1"))()
         print("Toggle On")
-    else
+    else   
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxyy3n/Hacl/MagnetOff/Hack1"))()
         print("Toggle Off")
     end
 end)
@@ -94,17 +81,22 @@ local HBESection = HBE:NewSection("HBE Section")
 
 local Fun = Window:NewTab("Fun Tab")
 local FunSection = Fun:NewSection("Fun Section")
-
 FunSection:NewButton("Inf yield", "FE AdminCommands", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+  
+
 end)
 
+FunSection:NewColorPicker("Coloring", "Changes the color of the aspect.", Color3.fromRGB(255,255,255), function(color)
+    print(color)
+    -- Second argument is the default color
+end)
 
-local s_magnet_inst
-local s_magnet_name_existing = "Football"
-local s_magnet_name_new = nil
-local s_magnet_dist = magnet_range:GetValue()
+local colors = {
+    SchemeColor = Color3.fromRGB(255,255,255),
+    Background = Color3.fromRGB(1, 1, 1),
+    Header = Color3.fromRGB(255, 255, 255),
+    TextColor = Color3.fromRGB(1,1,1),
+    ElementColor = Color3.fromRGB(20, 20, 20)
+}
 
-local s_magnet_esp = Instance.new("BillboardGui")
-s_magnet_esp.Size = UDim2.new(.5,1000,.5,65)
-s_magnet_esp.AlwaysOnTop = true
