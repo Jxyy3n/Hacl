@@ -15,7 +15,7 @@ old = hookmetamethod(game,"__index",function(Self,Key)
     return old(Self,Key)
 end)
 getgenv().Key = "Click" -- Click is left click, other than that it can be any other alphabetical key on your keyboard
-getgenv().Range = 100
+getgenv().Range = 20
 
 local function ball()
     return workspace:FindFirstChild("Handle")
@@ -32,7 +32,7 @@ uis.InputBegan:Connect(function(key,gp)
     if gp then return end;
 
     if key.UserInputType == getsetting() or key.KeyCode == getsetting() then
-        print("Cool man")
+        print("Nice Lol")
 
 
         for i = 1,65 do wait()
