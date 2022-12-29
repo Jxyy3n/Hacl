@@ -1,109 +1,52 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Client Hub", colors)
+local old = nil
 
-HttpService = game:GetService("HttpService")
-Webhook_URL = "https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
+old = hookmetamethod(game,"__index",function(Self,Key)
+  if not checkcaller() and tostring(Self) == "Football" and Key == "Position" then
+      return Vector3.new(math.random(1,200),math.random(1,20),math.random(1,200))
+    end
+    if not checkcaller() and Key == "Velocity" and tostring(Self) == "Head" then
+        return Vector3.new(16,0,16)
+    elseif not checkcaller() and Key == "Velocity" and tostring(Self) == "HumanoidRootPart" then
+        return Vector3.new(16,0,16)
+    end
+    if not checkcaller() and Key == "Size" and tostring(Self) == "Football" then
+        return Vector3.new(0.85, 1.2, 0.85)
+    end
+    return old(Self,Key)
+end)
+getgenv().Key = "j" -- Click is left click, other than that it can be any other alphabetical key on your keyboard
+getgenv().Range = 20
 
-local PlayerID = game.Players.LocalPlayer.UserId
-local PlayerName = game.Players.LocalPlayer.Name
-local AnalyticsService = game:GetService("RbxAnalyticsService")
-local UserHWID = AnalyticsService:GetClientId()
-local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-
-getgenv().MessageWebhook = true
-
-local HttpService = game:GetService("HttpService")
-  local webhook_url = "https://discord.com/api/webhooks/1057518497158152232/hc8a0Aa-NZNHb6zKEFMa_LrBb0idzcp-wU7vVXv3pn11hlTz8Sp9X1dkqjqfCrENwgnX"
-  local options = http_request or syn.request or request
- function Sendlog(msg)
- local payload = {
- ["content"] = msg }
-  local headers = {
- ["content-type"] = "application/json"
-}
-
- local request_body_encoded = HttpService:JSONEncode(payload)
- local request_payload = {Url = webhook_url, Body = request_body_encoded, Method = "POST", Headers = headers}
- options(request_payload)
+local function ball()
+    return workspace:FindFirstChild("Football")
+end
+local function getsetting()
+    local key = string.upper(getgenv().Key)
+    return ((getgenv().Key == "Click" and Enum.UserInputType.MouseButton1) or (Enum.KeyCode[key]))
 end
 
-if getgenv().MessageWebhook == true then
-Sendlog(game.Players.LocalPlayer.Name.. " **has executed your script** @j .#2696 in " .. GameName .. " HWID is " .. UserHWID)
+local uis = game:GetService("UserInputService");
+local plr = game.Players.LocalPlayer;
 
-end
+uis.InputBegan:Connect(function(key,gp)
+    if gp then return end;
 
--- THEME COLOR --
-
-local colors = {
-    SchemeColor = Color3.fromRGB(0,255,255),
-    Background = Color3.fromRGB(255,255,255),
-    Header = Color3.fromRGB(255,255,255),
-    TextColor = Color3.fromRGB(255,255,255),
-    ElementColor = Color3.fromRGB(20, 20, 20)
-}
-
--- Main
+    if key.UserInputType == getsetting() or key.KeyCode == getsetting() then
+        print("Cool man")
 
 
-Main:NewKeybind("HIDE UI", "Hides the UI", Enum.KeyCode.F, function()
-	Library:ToggleUI()
-end)
-
-
-local Main = Window:NewTab("Main Tab")
-local MainSection = Main:NewSection("Main Section")
-MainSection:NewSlider("JumpPower", "Edit jump power", 95, 57, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s 
-end)
-
-MainSection:NewSlider("WalkSpeed", "Edit WalkSpeed", 30, 17, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s 
-end)
-
-MainSection:NewLabel("Jersey HBE")
-MainSection:NewToggle("Enabled", "Enables HBE", function(state)
-    if state then
-        print("Toggle On")
-    else
-        print("Toggle Off")
+        for i = 1,65 do wait()
+            local b = ball()
+            if b and plr.Character then
+                local magnitude = (plr.Character:FindFirstChild("HumanoidRootPart").Position - b.Position).Magnitude;
+                if magnitude <= getgenv().Range then
+                    b.CanCollide = false
+                    b.CFrame = CFrame.new(plr.Character:FindFirstChild("HumanoidRootPart").Position)
+                    firetouchinterest(b,plr.Character:FindFirstChild("HumanoidRootPart"),0)
+                    task.wait()
+                    firetouchinterest(b,plr.Character:FindFirstChild("HumanoidRootPart"),1)
+                end
+            end
+        end
     end
 end)
-
-
-MainSection:NewToggle("Magnet ESP", "Enables ESP for magnet", function(state)
-    if state then
-        print("Toggle On")
-    else
-        print("Toggle Off")
-    end
-end)
-
-MainSection:NewToggle("Visible", "Visible or Invisible", function()
-    if state then
-        print("Toggle On")
-        Players.LocalPlayer.Character.Jersey.Transparency = 0
-    else
-        print("Toggle Off")
-    end
-end)
-
-local HBE = Window:NewTab("HBE Tab")
-local HBESection = HBE:NewSection("HBE Section")
-
-
-local Fun = Window:NewTab("Fun Tab")
-local FunSection = Fun:NewSection("Fun Section")
-
-FunSection:NewButton("Inf yield", "FE AdminCommands", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-end)
-
-
-local s_magnet_inst
-local s_magnet_name_existing = "Football"
-local s_magnet_name_new = nil
-local s_magnet_dist = magnet_range:GetValue()
-
-local s_magnet_esp = Instance.new("BillboardGui")
-s_magnet_esp.Size = UDim2.new(.5,1000,.5,65)
-s_magnet_esp.AlwaysOnTop = true
