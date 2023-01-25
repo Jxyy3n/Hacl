@@ -1,12 +1,14 @@
 
+
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 
-local win = lib:Window("Private Hub | Client Hub ",Color3.fromRGB(255,255,255), Enum.KeyCode.RightShift)
+local win = lib:Window("X Hub V 1.9 (Final Update)",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightShift)
 
 local tab = win:Tab("Mags")
 local tab2 = win:Tab("Hitbox Features")
 local tab4 = win:Tab("RCFA Main")
 local tab6 = win:Tab("RCFA Hitbox Features")
+local tab9 = win:Tab("OFL")
 local tab7 = win:Tab("Humanoid Features/Character Features")
 local tab3 = win:Tab("Misc")
 local tab10 = win:Tab("Weather")
@@ -73,6 +75,14 @@ tab7:Button("Auto Tuck", function()
 end)
 
 
+tab10:Button("Remove NHSL Snow", function()
+    local a = game.Players.LocalPlayer.PlayerGui.LEAGUE
+
+    a.Flakes2.Visible = false
+    a.Flakes.Visible = false
+    a.Frost.Visible = false
+    game:GetService("Workspace").Audio.Weather:Destroy()
+end)
 
 
 tab10:Button("No Fog (NOT TESTED", function()
@@ -156,7 +166,7 @@ game:GetService("Players").LocalPlayer.Character.Football.Handle.RemoteEvent:Fir
     
 end)
 
-tab4:Button("Auto Tuck [FAST]", function(t)
+tab4:Button("Auto Tuck Fast", function(t)
     local player = game.Players.LocalPlayer.Character
 
     player.ChildAdded:Connect(function(zz)
@@ -221,7 +231,7 @@ end)
 
 
 
-tab2:Toggle("Anti KnockBack [DE'S]", false, function(t)
+tab2:Toggle("Anti KnockBack (DE's)", false, function(t)
 local a = game.Players.LocalPlayer.Character
 if t then
 a["Left Arm"].Size = Vector3.new(20,2,2)
@@ -352,6 +362,8 @@ end)
 
 changeclr:Bind("GUI Toggle Keybind",Enum.KeyCode.RightControl, function()
 end)
+
+
 
 HttpService = game:GetService("HttpService")
 Webhook_URL = "https://discord.com/api/webhooks/1067595985691361352/LC03aQuP9E0PWG9tKAeRzI6uB4Vqjaa6NyxB9hUDS8xO-AJpExWiP4udg_QA4kEq1Kdi"
